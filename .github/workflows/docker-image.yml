@@ -28,25 +28,25 @@ jobs:
       with:
         push: true
         image: ochi1000/udagram-frontend:v1
-        tags: ${{ steps.meta.outputs.tags }}
+        tags: udagram-frontend
         
     - name: Build and push Docker udagram-api-user image
       uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
       with:
         push: true
         image: ochi1000/udagram-api-user:v1
-        tags: ${{ steps.meta.outputs.tags }}
+        tags: udagram-api-user
         
     - name: Build and push Docker udagram-api-feed image
       uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
       with:
         push: true
         image: ochi1000/udagram-api-feed:v1
-        tags: ${{ steps.meta.outputs.tags }}
+        tags: udagram-api-feed
         
     - name: Build and push Docker udagram-reverseproxy image
       uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
       with:
         push: true
         image: ochi1000/reverseproxy:v1
-        tags: ${{ steps.meta.outputs.tags }}
+        tags: udagram-reverseproxy
