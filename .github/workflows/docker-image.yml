@@ -12,14 +12,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    steps:
-    
-    - name: Checkout
-      uses: actions/checkout@v3
-      
-    - name: Build and compose Containers
-      run: docker compose up
-      
+    steps:      
     - name: Build and push Docker udagram-frontend image
       uses: actions/checkout@v3
       with:
