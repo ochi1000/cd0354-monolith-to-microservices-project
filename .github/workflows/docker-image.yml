@@ -1,0 +1,49 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Build and compose Containers
+      run: docker compose up
+      
+    - name: Build and push Docker udagram-frontend image
+      uses: actions/checkout@v3
+      with:
+        image: ochi1000/udagram-frontend:v1
+        registry: docker.io
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        
+    - name: Build and push Docker udagram-api-user image
+      uses: actions/checkout@v3
+      with:
+        image: ochi1000/udagram-api-user
+        registry: docker.io
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        
+    - name: Build and push Docker udagram-api-feed image
+      uses: actions/checkout@v3
+      with:
+        image: ochi1000/udagram-api-feed:v1
+        registry: docker.io
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        
+    - name: Build and push Docker udagram-reverseproxy image
+      uses: actions/checkout@v3
+      with:
+        image: ochi1000/reverseproxy:v1
+        registry: docker.io
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
