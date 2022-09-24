@@ -4,9 +4,6 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: ochi1000/udagram-api-feed:v1
-      - image: ochi1000/udagram-api-user:v1
-      - image: ochi1000/udagram-frontend:v1
       - image: ochi1000/reverseproxy:v1
         auth:
           username: $DOCKERHUB_USERNAME
@@ -14,9 +11,6 @@ jobs:
     steps:
       - checkout
       - run: docker compose up
-      - run: docker push ochi1000/udagram-api-feed:v1
-      - run: docker push ochi1000/udagram-api-user:v1
-      - run: docker push ochi1000/udagram-frontend:v1
       - run: docker push ochi1000/reverseproxy:v1
 
 # Orchestrate our job run sequence
