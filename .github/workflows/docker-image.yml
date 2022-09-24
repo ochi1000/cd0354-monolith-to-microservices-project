@@ -28,21 +28,25 @@ jobs:
       with:
         registry: docker.io
         image: ochi1000/udagram-frontend
+        tags: v1, latest
         
     - name: Build and push Docker udagram-api-user image
       uses: mr-smithers-excellent/docker-build-push@v4
       with:
         registry: docker.io
         image: ochi1000/udagram-api-user
+        tags: v1, latest
         
     - name: Build and push Docker udagram-api-feed image
       uses: mr-smithers-excellent/docker-build-push@v4
       with:
         registry: docker.io
         image: ochi1000/udagram-api-feed
+        tags: v1, latest
         
     - name: Build and push Docker udagram-reverseproxy image
       uses: mr-smithers-excellent/docker-build-push@v4
       with:
         registry: docker.io
         image: ochi1000/reverseproxy
+        tags: v1, latest
