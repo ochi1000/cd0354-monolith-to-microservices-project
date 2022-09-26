@@ -1,0 +1,55 @@
+verison: 2.1
+
+jobs:
+  insta-app:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+  build-docker:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Build docker container for each microservices
+          command: |
+            echo "------ Initializing dependencies --------"
+            sudo curl -LO https://nodejs.org/dist/v18.0.0-linux-x64.tar.xz
+            sudo tar -xvf node-v18.0.0-linux-x64.tar.xz
+            sudo cp -r node-v18.0.0-linux-x64/{bin, include,lib,share} /usr/
+            node --version => 18.0.0
+            sudo apt install nodejs
+
+            echo "--------- The images are Building --------"
+
+            docker build -t udagram-api-feed ./udagram-api-feed
+            docker tag udagram-api-feed ochi1000/udagram-api-feed:v1
+            
+            docker build -t udagram-api-user ./udagram-api-user
+            docker tag udagram-api-user ochi1000/udagram-api-user:v1
+            
+            docker build -t udagram-frontend ./udagram-frontend
+            docker tag udagram-frontend ochi1000/udagram-frontend:v1
+            
+            docker build -t udagram-reverseproxy ./udagram-reverseproxy
+            docker tag udagram-reverseproxy ochi1000/reverseproxy:v1
+
+            echo "------ All images successfully built--------"
+
+            echo "-------- Login to DockerHub--------"
+
+            docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+
+            echo "------- Pushing images to dockerhub ------"
+
+            docker push ochi1000/udagram-api-feed:v1
+            docker push ochi1000/udagram-api-user:v1
+            docker push ochi1000/udagram-frontend:v1
+            docker push ochi1000/reverseproxy:v1
+
+workflows:
+  default:
+    jobs:
+      - insta-app
+      - build-docker:
+          requires: [insta-app]
