@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: env-config-map
+data:
+    POSTGRES_HOST: database-1.cxdwrrqjixnp.us-east-1.rds.amazonaws.com
+    POSTGRES_DB: postgres
+    POSTGRES_PORT: "5432"
+    AWS_BUCKET: udacity-project-3-ochi
+    AWS_REGION: us-east-1
+    AWS_PROFILE: default
+    JWT_SECRET: testing
+    URL: http://localhost:8100
