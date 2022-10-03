@@ -22,3 +22,9 @@ spec:
             cpu: 500m
           requests:
             cpu: 200m
+        envFrom:
+        - configMapRef:
+            name: env-config-map
+        - secretRef:
+            name: env-secret
+      restartPolicy: Always
